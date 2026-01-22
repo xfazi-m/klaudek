@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klaudek | Senior Developer Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom Config & Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0a0a0a',
+                            primary: '#6366f1', // Indigo
+                            secondary: '#a855f7', // Purple
+                            accent: '#ec4899', // Pink
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px -10px rgba(99, 102, 241, 0.5)' },
+                            '100%': { boxShadow: '0 0 30px 10px rgba(168, 85, 247, 0.6)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #030305;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #6366f1, #ec4899);
+            border-radius: 4px;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .text-gradient-primary {
+            background: linear-gradient(to right, #818cf8, #c084fc, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 5s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Neon Button Effect */
+        .btn-neon {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+            z-index: -1;
+            transition: transform 0.4s ease;
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+        .btn-neon:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        .btn-neon:hover {
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+            border-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-purple-500 selection:text-white">
+
+    <!-- Animated Background Mesh -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob"></div>
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-indigo-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-pink-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Navigation (Minimal) -->
+    <nav class="fixed w-full z-50 top-0 left-0 px-6 py-6" data-aos="fade-down" data-aos-duration="1000">
+        <div class="max-w-7xl mx-auto flex justify-between items-center glass-card rounded-full px-6 py-3">
+            <div class="font-display font-bold text-xl tracking-tighter">Klaudek<span class="text-purple-500">.</span></div>
+            <a href="#contact" class="text-sm font-medium hover:text-purple-400 transition-colors">Dostępność: <span class="text-green-400">Online</span></a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="min-h-screen flex flex-col justify-center items-center relative px-4 text-center">
+        
+        <!-- Decorative Elements -->
+        <div class="absolute top-1/3 left-[10%] opacity-20 hidden lg:block" data-aos="zoom-in" data-aos-delay="200">
+            <i class="fa-solid fa-code text-6xl animate-float"></i>
+        </div>
+        <div class="absolute bottom-1/3 right-[10%] opacity-20 hidden lg:block" data-aos="zoom-in" data-aos-delay="400">
+            <i class="fa-solid fa-terminal text-6xl animate-float" style="animation-delay: 1s;"></i>
+        </div>
+
+        <div class="max-w-5xl mx-auto z-10">
+            <div class="inline-block px-4 py-1.5 mb-6 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-xs font-medium tracking-widest uppercase text-gray-400" data-aos="fade-down">
+                Professional Developer
+            </div>
+            
+            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8" data-aos="fade-up" data-aos-duration="1200">
+                Napiszę z tobą <br />
+                <span class="text-gradient-primary">kod twoich marzeń</span>
+            </h1>
+
+            <p class="font-sans text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="200">
+                Tworzę rozwiązania cyfrowe, które wyprzedzają teraźniejszość. Precyzja, wydajność i estetyka w każdej linii kodu.
+            </p>
+
+            <div class="flex flex-col md:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="400">
+                <a href="#tech" class="px-8 py-4 rounded-full bg-white text-black font-bold hover:scale-105 transition-transform duration-300">
+                    Zobacz jak pracuję
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce opacity-50">
+            <i class="fa-solid fa-arrow-down text-xl"></i>
+        </div>
+    </section>
+
+    <!-- TECH SECTION -->
+    <section id="tech" class="py-32 px-4 relative">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- Header -->
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="font-display text-4xl md:text-6xl font-bold mb-4">Technika i <span class="text-purple-500">Wykonanie</span></h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-6"></div>
+                <p class="text-xl text-gray-300 font-light tracking-wide">Oto programy w których piszę <span class="font-bold text-white bg-white/10 px-2 py-1 rounded">KOD</span></p>
+            </div>
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                
+                <!-- Card 1: JS -->
+                <div class="group relative" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl blur opacity-20 group-hover:opacity-75 transition duration-500"></div>
+                    <div class="relative glass-card rounded-2xl p-8 h-full flex flex-col items-center justify-center text-center transform group-hover:-translate-y-2 transition-transform duration-300">
+                        <div class="w-20 h-20 bg-black/50 rounded-2xl flex items-center justify-center mb-6 border border-yellow-500/30 group-hover:border-yellow-400 transition-colors">
+                            <i class="fa-brands fa-js text-5xl text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-display text-3xl font-bold mb-2">JavaScript</h3>
+                        <p class="text-gray-400 text-sm">Logika, interaktywność i serce nowoczesnych aplikacji webowych.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: VS Code -->
+                <div class="group relative" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-20 group-hover:opacity-75 transition duration-500"></div>
+                    <div class="relative glass-card rounded-2xl p-8 h-full flex flex-col items-center justify-center text-center transform group-hover:-translate-y-2 transition-transform duration-300">
+                        <div class="w-20 h-20 bg-black/50 rounded-2xl flex items-center justify-center mb-6 border border-blue-500/30 group-hover:border-blue-400 transition-colors">
+                            <i class="fa-solid fa-code text-4xl text-blue-400"></i>
+                        </div>
+                        <h3 class="font-display text-3xl font-bold mb-2">Visual Studio Code</h3>
+                        <p class="text-gray-400 text-sm">Moje centrum dowodzenia. Środowisko, gdzie powstaje magia.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+        <!-- DISCORD & CONTACT SECTION -->
+        <section class="container max-w-3xl mx-auto mb-20">
+            <div class="glass-panel rounded-[2.5rem] p-1 md:p-2 border border-white/10 relative overflow-hidden" data-aos="zoom-in-up" data-aos-duration="1000">
+                
+                <!-- Decorative background elements -->
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-50"></div>
+                
+                <div class="bg-[#0a0a0a]/80 backdrop-blur-xl rounded-[2rem] p-8 md:p-12 relative z-10 flex flex-col items-center text-center">
+                    
+                    <!-- Discord Avatar/Icon -->
+                    <div class="relative mb-6 group cursor-pointer" onclick="copyDiscord()">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
+                        <div class="relative w-24 h-24 bg-gray-900 rounded-full flex items-center justify-center border-2 border-white/20 overflow-hidden">
+                            <i class="fa-brands fa-discord text-4xl text-white"></i>
+                        </div>
+                        <div class="absolute bottom-1 right-1 w-6 h-6 bg-green-500 border-4 border-black rounded-full" title="Online"></div>
+                    </div>
+
+                    <h2 class="font-display text-3xl font-bold text-white mb-2">Dołącz do znajomych</h2>
+                    <p class="text-gray-400 mb-8 max-w-md">Chcesz stworzyć coś niesamowitego? Skontaktuj się ze mną przez Discord.</p>
+
+                    <!-- Discord Username Box -->
+                    <div class="flex flex-col md:flex-row gap-4 w-full justify-center items-center mb-8">
+                        <div class="relative group w-full md:w-auto">
+                            <div class="flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-4 rounded-xl w-full md:w-80 justify-between transition-all hover:border-primary/50 hover:bg-white/10 cursor-pointer" onclick="copyDiscord()">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-regular fa-id-card text-gray-400"></i>
+                                    <span class="font-mono text-lg tracking-wide select-all" id="discord-nick">klaudekyt</span>
+                                </div>
+                                <i class="fa-regular fa-copy text-gray-500 group-hover:text-white transition-colors"></i>
+                            </div>
+                            <span id="copy-tooltip" class="absolute -top-10 left-1/2 -translate-x-1/2 bg-green-500 text-black text-xs font-bold px-3 py-1 rounded-md opacity-0 transition-opacity duration-300">Skopiowano!</span>
+                        </div>
+                        
+                        <!-- Join Server Button -->
+                        <a href="https://discord.gg/litemc" class="w-full md:w-auto px-8 py-4 rounded-xl bg-white/5 border border-white/10 hover:bg-[#5865F2] hover:border-[#5865F2] hover:text-white transition-all duration-300 flex items-center justify-center gap-2 group">
+                            <i class="fa-solid fa-server text-gray-400 group-hover:text-white transition-colors"></i>
+                            <span>Dołącz na serwer</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- FOOTER -->
+    <footer class="pt-20 pb-10 px-4 border-t border-white/5 relative bg-black">
+        <div class="max-w-7xl mx-auto flex flex-col items-center justify-center">
+            
+            <!-- Animated Name -->
+            <div class="mb-8 overflow-hidden" data-aos="fade-up">
+                <h1 class="font-display text-[15vw] md:text-[12vw] leading-none font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-900 opacity-20 hover:opacity-40 transition-opacity duration-500 select-none tracking-tighter">
+                    KLAUDEK
+                </h1>
+            </div>
+
+            <!-- Copyright -->
+            <div class="flex flex-col md:flex-row justify-between items-center w-full text-gray-500 text-sm font-light mt-8 border-t border-white/5 pt-8">
+                <p data-aos="fade-right">
+                    &copy; 2024 Klaudek® Wszelkie prawa zastrzeżone.
+                </p>
+                <div class="flex gap-6 mt-4 md:mt-0" data-aos="fade-left">
+                    <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                    <a href="#" class="hover:text-white transition-colors">Twitter</a>
+                    <a href="#" class="hover:text-white transition-colors">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Init Animate On Scroll
+        AOS.init({
+            once: false, // animation should happen every time you scroll up/down
+            mirror: true,
+            offset: 100,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+
+        // Simple smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
